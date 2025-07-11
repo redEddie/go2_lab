@@ -1,9 +1,36 @@
-# Copyright (c) 2024-2025, The Isaac Lab Project Developers.
+# Copyright (c) 2022-2024, The Isaac Lab Project Developers.
 # All rights reserved.
 #
-# SPDX-License-Identifier: Apache-2.0
+# SPDX-License-Identifier: BSD-3-Clause
 
-"""Script to train RL agent with RSL-RL."""
+
+"""
+Script to train RL agent with RSL-RL.
+
+
+Example usage:
+
+.. code-block:: bash
+
+    # train arguments
+    --headless --max_iteration 5000 --resume True
+
+    # train(flat)
+    python scripts/rsl_rl/train.py --task=Template-Isaac-Velocity-Flat-Go2-v0
+    
+    # train(rough)
+    python scripts/rsl_rl/train.py --task=Template-Isaac-Velocity-Rough-Go2-v0
+    
+    # train(climb)
+    python scripts/rsl_rl/train.py --task=Template-Isaac-Velocity-Climb-Go2-v0
+
+    # train(malfunction)
+    python scripts/rsl_rl/train.py --task=Template-Isaac-Velocity-Malfunction-Go2-v0
+    
+    # tensorboard
+    python -m tensorboard.main --logdir logs/rsl_rl
+
+"""
 
 """Launch Isaac Sim Simulator first."""
 
@@ -65,7 +92,7 @@ from isaaclab_tasks.utils import get_checkpoint_path
 from isaaclab_tasks.utils.hydra import hydra_task_config
 
 # Import extensions to set up environment tasks
-import ext_template.tasks  # noqa: F401
+import go2_lab.tasks  # noqa: F401
 
 torch.backends.cuda.matmul.allow_tf32 = True
 torch.backends.cudnn.allow_tf32 = True

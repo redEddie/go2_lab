@@ -1,0 +1,10 @@
+pyproject.toml
+setup.py
+go2_lab/__init__.py
+go2_lab/ui_extension_example.py
+go2_lab.egg-info/PKG-INFO
+go2_lab.egg-info/SOURCES.txt
+go2_lab.egg-info/dependency_links.txt
+go2_lab.egg-info/not-zip-safe
+go2_lab.egg-info/requires.txt
+go2_lab.egg-info/top_level.txt
