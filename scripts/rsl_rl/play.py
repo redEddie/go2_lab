@@ -22,6 +22,9 @@ Example usage:
 
     # play(malfunction)
     python scripts/rsl_rl/play.py --task=Template-Isaac-Velocity-Malfunction-Go2-Play-v0
+
+    # play(fuzzy)
+    python scripts/rsl_rl/play.py --task=Template-Isaac-Velocity-Fuzzy-Go2-Play-v0
     
     # tensorboard
     python -m tensorboard.main --logdir logs/rsl_rl
@@ -29,6 +32,8 @@ Example usage:
 """
 
 import argparse
+import numpy as np
+import os
 
 from isaaclab.app import AppLauncher
 
@@ -218,6 +223,10 @@ def main():
         ppo_runner.alg.policy, normalizer=ppo_runner.obs_normalizer, path=export_model_dir, filename="policy.onnx"
     )
 
+    all_actions = []
+    data_dir = os.path.join(os.path.dirname(resume_path), "play_data")
+    os.makedirs(data_dir, exist_ok=True)
+
     # reset environment
     obs, _ = env.get_observations()
     timestep = 0
@@ -227,6 +236,7 @@ def main():
             actions = policy(obs)
             # print_observation(obs)
             # get_robot_state(env)
+            all_actions.append(actions[0].cpu().numpy())
             # env stepping
             obs, _, _, _ = env.step(actions)
         if args_cli.video:
@@ -237,6 +247,10 @@ def main():
 
     # close the simulator
     env.close()
+    np.savez(
+        os.path.join(data_dir, "actions.npz"),
+        actions=np.array(all_actions),
+    )
 
 
 if __name__ == "__main__":
