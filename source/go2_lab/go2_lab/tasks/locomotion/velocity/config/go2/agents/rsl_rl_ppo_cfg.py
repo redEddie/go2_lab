@@ -61,3 +61,8 @@ class Go2MalfunctionPPORunnerCfg(Go2RoughPPORunnerCfg):
     def __post_init__(self):
         super().__post_init__()
         self.experiment_name = "go2_malfunction"
+
+class Go2FuzzyPPORunnerCfg(Go2RoughPPORunnerCfg):
+    def __post_init__(self):
+        super().__post_init__()
+        self.experiment_name = "go2_fuzzy"
