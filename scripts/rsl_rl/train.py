@@ -26,6 +26,9 @@ Example usage:
 
     # train(malfunction)
     python scripts/rsl_rl/train.py --task=Template-Isaac-Velocity-Malfunction-Go2-v0
+
+    # train(fuzzy)
+    python scripts/rsl_rl/train.py --task=Template-Isaac-Velocity-Fuzzy-Go2-v0
     
     # tensorboard
     python -m tensorboard.main --logdir logs/rsl_rl
